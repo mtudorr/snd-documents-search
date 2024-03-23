@@ -13,6 +13,12 @@ namespace SearchService.Deploy
             {
                 StackName = $"{configuration.Env}-search-service-deploy-stack"
             });
+
+            new PipelineStack(app, $"{configuration.Env}-PipelineStack", configuration, new StackProps
+            {
+                StackName = $"{configuration.Env}-pipeline-stack"
+            });
+            
             app.Synth();
         }
     }

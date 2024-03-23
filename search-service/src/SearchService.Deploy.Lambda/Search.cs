@@ -11,7 +11,7 @@ public class Search: FuncApi
         return Task.FromResult(new APIGatewayProxyResponse
         {
             StatusCode = 200,
-            Body = JsonConvert.SerializeObject(httpRequest.QueryStringParameters)
+            Body = JsonConvert.SerializeObject(new { QS = httpRequest.QueryStringParameters })
         });
     }
 }
