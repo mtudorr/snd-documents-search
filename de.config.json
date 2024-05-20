@@ -15,8 +15,8 @@
         "stages": [
             {
                 "id": "Build",
-                "environmentVariables": [],
-                "environmentSecrets": [],
+                "environmentVariables": {},
+                "environmentSecrets": {},
                 "steps": [
                     {
                         "action": "install",
