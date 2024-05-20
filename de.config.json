@@ -16,7 +16,7 @@
             {
                 "id": "Build",
                 "environmentVariables": {},
-                "environmentSecrets": {},
+                "environmentSecrets": [],
                 "steps": [
                     {
                         "action": "install",
