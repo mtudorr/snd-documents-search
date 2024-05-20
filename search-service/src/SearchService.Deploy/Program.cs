@@ -6,17 +6,12 @@ namespace SearchService.Deploy
     {
         public static void Main(string[] args)
         {
-            var configuration = new Configuration();
             var app = new App();
+            var configuration = new Configuration(app.Node);
             
             new SearchServiceDeployStack(app, $"{configuration.Env}-SearchServiceDeployStack", configuration, new StackProps
             {
                 StackName = $"{configuration.Env}-search-service-deploy-stack"
-            });
-
-            new PipelineStack(app, $"{configuration.Env}-PipelineStack", configuration, new StackProps
-            {
-                StackName = $"{configuration.Env}-pipeline-stack"
             });
             
             app.Synth();

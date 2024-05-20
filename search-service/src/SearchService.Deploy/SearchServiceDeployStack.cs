@@ -25,7 +25,7 @@ namespace SearchService.Deploy
                         "/bin/sh",
                         "-c",
                         " dotnet tool install -g Amazon.Lambda.Tools" +
-                        " && dotnet lambda package --output-package /asset-output/function.zip -pl src/SearchService.Deploy.Lambda -c " + buildConfiguration
+                        " && dotnet lambda package --output-package /asset-output/function.zip -pl src/SearchService.Deploy.Lambda -c " + System.Environment.GetEnvironmentVariable("DOTNET_BUILD_CONFIGURATION")
                     }
                 }
             });
