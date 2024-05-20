@@ -20,26 +20,7 @@
     "pipeline": {
         "stages": [
             {
-                "id": "Install",
-                "steps": [
-                    {
-                        "action": "install",
-                        "commands": [
-                            "npm ci",
-
-                            "cd search-service",
-                            "npm ci",
-                            "cd ../"
-                        ]
-                    }
-                ],
-                "outputFiles": [
-                    "**/*"
-                ]
-            },
-            {
                 "id": "Build",
-                "idOfInputStage": "Install",
                 "steps": [
                     {
                         "action": "build",
@@ -57,9 +38,14 @@
                 "idOfInputStage": "Build",
                 "steps": [
                     {
+                        "action": "install",
+                        "commands": [
+                            "npm ci"
+                        ]
+                    },
+                    {
                         "action": "build",
                         "commands": [
-                            "dotnet --version",
                             "cd search-service",
                             "npx cdk deploy *-SearchServiceDeployStack"
                         ]
