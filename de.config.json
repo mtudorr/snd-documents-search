@@ -4,32 +4,47 @@
             "awsAccountId": "787554509201",
             "awsRegion": "eu-central-1",
             "label": "stg",
-            "branch": "develop"
+            "branch": "develop",
+            "environmentVariables": {
+                "DOTNET_BUILD_CONFIGURATION": "Release"
+            }
         }
     ],
     "environmentFeature": {
         "awsAccountId": "787554509201",
-        "awsRegion": "eu-central-1"
+        "awsRegion": "eu-central-1",
+        "environmentVariables": {
+            "DOTNET_BUILD_CONFIGURATION": "Debug"
+        }
     },
     "pipeline": {
         "stages": [
             {
-                "id": "Build",
-                "environmentVariables": {},
-                "environmentSecrets": [],
+                "id": "Install",
                 "steps": [
                     {
                         "action": "install",
                         "commands": [
-                            "npm ci"
+                            "npm ci",
+
+                            "cd search-service",
+                            "npm ci",
+                            "cd ../"
                         ]
-                    },
+                    }
+                ],
+                "outputFiles": [
+                    "**/*"
+                ]
+            },
+            {
+                "id": "Build",
+                "idOfInputStage": "Install",
+                "steps": [
                     {
                         "action": "build",
                         "commands": [
-                            "ls -la",
-                            "dotnet --version",
-                            "dotnet build ./search-service/src/SearchService.sln -c Debug"
+                            "dotnet build ./search-service/src/SearchService.sln -c $DOTNET_BUILD_CONFIGURATION"
                         ]
                     }
                 ],
@@ -40,14 +55,13 @@
             {
                 "id": "Deploy",
                 "idOfInputStage": "Build",
-                "environmentVariables": {},
-                "environmentSecrets": [],
                 "steps": [
                     {
                         "action": "build",
                         "commands": [
-                            "ls -la",
-                            "dotnet --version"
+                            "dotnet --version",
+                            "cd search-service",
+                            "npx cdk deploy *-SearchServiceDeployStack"
                         ]
                     }
                 ]
