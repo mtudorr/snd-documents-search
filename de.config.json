@@ -22,11 +22,35 @@
                         "action": "install",
                         "commands": [
                             "npm ci"
-                        ],
-                        "excludedEnvironments": []
+                        ]
+                    },
+                    {
+                        "action": "build",
+                        "commands": [
+                            "ls -la",
+                            "dotnet --version",
+                            "dotnet build ./search-service/src/SearchService.sln -c Debug"
+                        ]
                     }
                 ],
-                "excludedEnvironments": []
+                "outputFiles": [
+                    "**/*"
+                ]
+            },
+            {
+                "id": "Deploy",
+                "idOfInputStage": "Build",
+                "environmentVariables": {},
+                "environmentSecrets": [],
+                "steps": [
+                    {
+                        "action": "build",
+                        "commands": [
+                            "ls -la",
+                            "dotnet --version"
+                        ]
+                    }
+                ]
             }
         ]
     }
