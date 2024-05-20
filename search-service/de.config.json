@@ -1,0 +1,33 @@
+{
+    "environmentStable": [
+        {
+            "awsAccountId": "787554509201",
+            "awsRegion": "eu-central-1",
+            "label": "stg",
+            "branch": "develop"
+        }
+    ],
+    "environmentFeature": {
+        "awsAccountId": "787554509201",
+        "awsRegion": "eu-central-1"
+    },
+    "pipeline": {
+        "stages": [
+            {
+                "id": "Build",
+                "environmentVariables": [],
+                "environmentSecrets": [],
+                "steps": [
+                    {
+                        "action": "install",
+                        "commands": [
+                            "npm ci"
+                        ],
+                        "excludedEnvironments": []
+                    }
+                ],
+                "excludedEnvironments": []
+            }
+        ]
+    }
+}
