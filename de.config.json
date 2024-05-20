@@ -47,7 +47,7 @@
                         "action": "build",
                         "commands": [
                             "cd search-service",
-                            "npx cdk deploy *-SearchServiceDeployStack"
+                            "npx cdk deploy *-SearchServiceDeployStack --context env=$ENV"
                         ]
                     }
                 ]
