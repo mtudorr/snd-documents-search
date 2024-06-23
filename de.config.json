@@ -7,7 +7,10 @@
             "branch": "develop",
             "environmentVariables": {
                 "DOTNET_BUILD_CONFIGURATION": "Release"
-            }
+            },
+            "environmentSecrets": [
+                "SONAR_TOKEN"
+            ]
         }
     ],
     "environmentFeature": {
@@ -15,7 +18,10 @@
         "awsRegion": "eu-central-1",
         "environmentVariables": {
             "DOTNET_BUILD_CONFIGURATION": "Debug"
-        }
+        },
+        "environmentSecrets": [
+            "SONAR_TOKEN"
+        ]
     },
     "pipeline": {
         "stages": [
@@ -23,9 +29,27 @@
                 "id": "Build",
                 "steps": [
                     {
+                        "action": "install",
+                        "commands": [
+                            "dotnet tool install --global dotnet-sonarscanner"
+                        ]
+                    },
+                    {
+                        "action": "pre_build",
+                        "commands": [
+                            "dotnet sonarscanner begin /k:\"mtudorr_snd-documents-search\" /o:\"mtudorr\" /d:sonar.token=\"$SONAR_TOKEN\""
+                        ]
+                    },
+                    {
                         "action": "build",
                         "commands": [
                             "dotnet build ./search-service/src/SearchService.sln -c $DOTNET_BUILD_CONFIGURATION"
+                        ]
+                    },
+                    {
+                        "action": "post_build",
+                        "commands": [
+                            "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\""
                         ]
                     }
                 ],
