@@ -1,3 +1,5 @@
+.sonar
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
@@ -340,3 +342,5 @@ ASALocalRun/
 
 
 # End of https://www.gitignore.io/api/csharp
+.sonar/report-task.txt
+.sonar/.sonar_lock
