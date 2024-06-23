@@ -37,7 +37,7 @@
                     {
                         "action": "pre_build",
                         "commands": [
-                            "dotnet sonarscanner begin /k:\"mtudorr_snd-documents-search\" /o:\"mtudorr\" /d:sonar.token=\"$SONAR_TOKEN\""
+                            "dotnet sonarscanner begin /k:\"mtudorr_snd-documents-search\" /o:\"mtudorr\" /d:sonar.token=\"$SONAR_TOKEN\" /d:sonar.host.url=\"https://sonarcloud.io\""
                         ]
                     },
                     {
@@ -49,7 +49,7 @@
                     {
                         "action": "post_build",
                         "commands": [
-                            "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\""
+                            "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\" /d:sonar.host.url=\"https://sonarcloud.io\""
                         ]
                     }
                 ],
