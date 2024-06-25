@@ -20,6 +20,13 @@
     "pipeline": {
         "stages": [
             {
+                "id": "Review",
+                "steps": [
+                    {
+                    }
+                ]
+            },
+            {
                 "id": "Build",
                 "steps": [
                     {
